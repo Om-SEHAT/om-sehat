@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "om-sehat-backend": {
+      "main": "src/om-sehat-backend/main.mo",
+      "type": "motoko"
+    },
+    "om-sehat-frontend": {
+      "dependencies": [
+        "om-sehat-backend"
+      ],
+      "source": [
+        "src/om-sehat-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "om-sehat-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
