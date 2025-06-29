@@ -5,6 +5,10 @@ import Iter "mo:base/Iter";
 import Result "mo:base/Result";
 import Array "mo:base/Array";
 
+// Import schemas
+import RegisterUserInput "./schemas/RegisterUserInput";
+import OTPInput "./schemas/OTPInput";
+
 // Import models
 import Doctor "./models/Doctor";
 import User "./models/User";
@@ -16,6 +20,7 @@ import Message "./models/Message";
 import DoctorController "./controllers/DoctorController";
 import QueueController "./controllers/QueueController";
 import SessionController "./controllers/SessionController";
+import UserController "./controllers/UserController";
 
 actor OmSehatBackend {
   // Define persistent storage
@@ -147,13 +152,10 @@ actor OmSehatBackend {
   // Session Controller Endpoints
   
   // Generate Session Response endpoint
-  public func generateSessionResponse(sessionId : Text, newMessage : Text) : async Result.Result<SessionController.LLMSessionResponse, Text> {
+  public func generateSessionResponse(sessionId : Text, newMessage : Text, geminiApiKey : Text, emailToken : Text) : async Result.Result<SessionController.LLMSessionResponse, Text> {
     let input : SessionController.GenerateSessionInput = {
       newMessage = newMessage;
     };
-    
-    let geminiApiKey = "YOUR_GEMINI_API_KEY"; // Replace with actual API key
-    let emailToken = "YOUR_EMAIL_TOKEN"; // Replace with actual email token
     
     switch (await SessionController.generateSessionResponse(
       sessionId, 
@@ -225,6 +227,83 @@ actor OmSehatBackend {
           };
           case (#JSONParsingError(msg)) {
             #err("JSON Parsing Error: " # msg)
+          };
+        }
+      };
+    }
+  };
+  
+  // User Controller Endpoints
+  
+  // Register User endpoint
+  public func registerUser(input : RegisterUserInput.RegisterUserInput, emailToken : Text) : async Result.Result<UserController.RegisterResponse, Text> {
+    switch (await UserController.registerUser(input, users, emailToken)) {
+      case (#ok(response)) {
+        #ok(response)
+      };
+      case (#err(error)) {
+        switch (error) {
+          case (#NotFound(msg)) {
+            #err("Not Found: " # msg)
+          };
+          case (#InvalidInput(msg)) {
+            #err("Invalid Input: " # msg)
+          };
+          case (#ValidationFailed(msg)) {
+            #err("Validation Failed: " # msg)
+          };
+          case (#InternalError(msg)) {
+            #err("Internal Error: " # msg)
+          };
+        }
+      };
+    }
+  };
+  
+  // Verify OTP endpoint
+  public func verifyOTP(input : OTPInput.OTPInput) : async Result.Result<UserController.VerifyOTPResponse, Text> {
+    switch (UserController.verifyOTP(input, users, sessions)) {
+      case (#ok(response)) {
+        #ok(response)
+      };
+      case (#err(error)) {
+        switch (error) {
+          case (#NotFound(msg)) {
+            #err("Not Found: " # msg)
+          };
+          case (#InvalidInput(msg)) {
+            #err("Invalid Input: " # msg)
+          };
+          case (#ValidationFailed(msg)) {
+            #err("Validation Failed: " # msg)
+          };
+          case (#InternalError(msg)) {
+            #err("Internal Error: " # msg)
+          };
+        }
+      };
+    }
+  };
+  
+  // Get User Details endpoint
+  public query func getUserDetails(userId : Text) : async Result.Result<UserController.UserDetailsResponse, Text> {
+    switch (UserController.getUserDetails(userId, users, sessions, queues)) {
+      case (#ok(response)) {
+        #ok(response)
+      };
+      case (#err(error)) {
+        switch (error) {
+          case (#NotFound(msg)) {
+            #err("Not Found: " # msg)
+          };
+          case (#InvalidInput(msg)) {
+            #err("Invalid Input: " # msg)
+          };
+          case (#ValidationFailed(msg)) {
+            #err("Validation Failed: " # msg)
+          };
+          case (#InternalError(msg)) {
+            #err("Internal Error: " # msg)
           };
         }
       };
