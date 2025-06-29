@@ -1,0 +1,160 @@
+.sensor-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* Significantly increased z-index to ensure it's above all other elements */
+}
+
+.sensor-dialog-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.sensor-dialog-content {
+  padding: 1.5rem;
+}
+
+.sensor-dialog-header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sensor-dialog-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.sensor-dialog-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0; /* Vertical padding is fine, horizontal handled by text-align */
+}
+
+.sensor-loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem; /* Increased space after spinner */
+}
+
+.sensor-spinner {
+  animation: rotate 2s linear infinite;
+  width: 50px;
+  height: 50px;
+}
+
+.sensor-spinner .path {
+  stroke: #3b82f6; /* Blue color for spinner */
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.sensor-loading-text {
+  font-size: 1rem;    /* Main status text */
+  font-weight: 600;   /* Bolder for emphasis */
+  color: #333;         /* Darker for better readability */
+  text-align: center;
+  margin-bottom: 0.5rem; /* Space below it */
+}
+
+.sensor-timeout-text {
+  font-size: 0.9rem;    /* Slightly smaller for secondary info */
+  color: #555;
+  text-align: center;
+  margin-bottom: 0.75rem; /* Space before the help text */
+}
+
+.sensor-help-text {
+  font-size: 0.85rem;   /* Smallest, as it's a hint */
+  color: #777;         /* Lighter color */
+  text-align: center;
+  line-height: 1.4;     /* Improve readability if text wraps */
+  padding: 0 0.5rem;    /* Add slight horizontal padding if text can be long */
+}
+
+.sensor-dialog-footer {
+  display: flex;
+  justify-content: center; /* Center the single button */
+  margin-top: 1.5rem; /* Increased space above the footer */
+}
+
+.sensor-dialog-error {
+  color: #ef4444;     /* Standard error color (Tailwind's red-500) */
+  font-weight: 500;   /* Make error message slightly bolder */
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.4;     /* For better readability of potentially longer error messages */
+}
+
+/* Sensor read button (used in PatientForm.tsx) - styles remain the same */
+.sensor-read-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3b82f6; /* Blue-500 */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 0.5rem; /* Space from the input field */
+}
+
+.sensor-read-button:hover {
+  background-color: #2563eb; /* Blue-600 */
+}
+
+.sensor-read-button:disabled {
+  background-color: #93c5fd; /* Blue-300 */
+  cursor: not-allowed;
+}
+
+.sensor-read-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Input with controls (used in PatientForm.tsx) - styles remain the same */
+.input-with-controls {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-controls .input-with-suffix {
+  flex: 1; /* Allows the input part to take available space */
+}

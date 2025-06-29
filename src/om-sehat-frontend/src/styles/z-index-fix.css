@@ -1,0 +1,58 @@
+/* Base z-index scale */
+:root {
+  --z-background: 0;
+  --z-content: 1;
+  --z-header: 10;
+  --z-dropdown: 100;
+  --z-modal: 1000;
+  --z-overlay: 2000;
+  --z-tooltip: 3000;
+}
+
+/* App container */
+.app-container {
+  isolation: isolate;
+}
+
+/* Base content */
+.footer-main,
+.footer-link {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* Modals and overlays */
+.modal-overlay,
+.search-overlay-backdrop {
+  position: fixed !important;
+  z-index: var(--z-overlay) !important;
+  isolation: isolate !important;
+}
+
+/* PIN and OTP dialogs should be on top */
+.pin-dialog-wrapper,
+.otp-dialog-overlay,
+.sensor-dialog-overlay {
+  position: fixed !important;
+  z-index: calc(var(--z-overlay) + 100) !important;
+  isolation: isolate !important;
+}
+
+/* Modal portal should be the highest */
+#modal-portal {
+  position: fixed;
+  z-index: calc(var(--z-overlay) + 200) !important;
+}
+
+/* Doctor detail modal */
+.doctor-detail-modal {
+  position: fixed;
+  z-index: var(--z-modal) !important;
+}
+
+.doctor-detail-modal-overlay {
+  position: fixed;
+  z-index: var(--z-modal) !important;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}

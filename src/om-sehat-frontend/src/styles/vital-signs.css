@@ -1,0 +1,110 @@
+/* VitalSigns Component Styles */
+
+.vital-signs-container {
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.vital-signs-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Parameter value animations */
+@keyframes pulse-value {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.value-updated {
+  animation: pulse-value 0.5s ease-in-out;
+}
+
+/* Status indicators */
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-normal {
+  background-color: #10B981; /* green-500 */
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.status-warning {
+  background-color: #F59E0B; /* amber-500 */
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.status-critical {
+  background-color: #EF4444; /* red-500 */
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #1F2937;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Badge animations */
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-beat {
+  animation: beat 1s infinite;
+}
+
+/* Refresh button animations */
+.refresh-button {
+  transition: transform 0.2s ease-in-out;
+}
+
+.refresh-button:hover:not(:disabled) {
+  transform: rotate(30deg);
+}
+
+.refresh-button:active:not(:disabled) {
+  transform: rotate(360deg);
+}

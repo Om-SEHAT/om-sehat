@@ -1,0 +1,401 @@
+/* PIN Dialog Styles - Extending OTP Dialog Styles */
+
+/* Override overlay styles for PIN dialog specifically */
+.pin-dialog-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999; /* Extremely high z-index to ensure it's above everything */
+  isolation: isolate; /* Create a new stacking context */
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pin-dialog-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  max-width: 480px;
+  width: 95%;
+  transform: translateY(0);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative; /* Create a new stacking context */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: slideUp 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.pin-dialog-header {
+  background: linear-gradient(135deg, #228BE6 0%, #1971c2 100%);
+  padding: 32px 24px;
+  border-bottom: none;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pin-dialog-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  opacity: 0.5;
+  transform: rotate(-15deg);
+}
+
+.pin-dialog-title {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.pin-dialog-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.pin-dialog-logo::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.pin-logo-circle {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.pin-logo-circle:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.pin-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 36px 0;
+  position: relative;
+}
+
+.pin-input-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(34, 139, 230, 0.05) 0%, transparent 70%);
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.pin-input {
+  width: 54px;
+  height: 68px;
+  border: 2px solid #d1d5db;
+  border-radius: 16px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+  color: #1971c2;
+}
+
+.pin-input:focus {
+  border-color: #228BE6;
+  box-shadow: 0 0 0 5px rgba(34, 139, 230, 0.2);
+  transform: translateY(-5px);
+}
+
+.pin-input.error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 5px rgba(229, 62, 62, 0.15);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.pin-input.filled {
+  background-color: #f0f9ff;
+  border-color: #bae6fd;
+  box-shadow: 0 6px 12px rgba(34, 139, 230, 0.08);
+}
+
+.pin-info-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #228BE6;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  margin: 0 auto 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pin-info-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(34, 139, 230, 0.05);
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pin-info-button:hover::before {
+  opacity: 1;
+}
+
+.pin-info-button:hover {
+  color: #1864ab;
+  transform: translateY(-2px);
+}
+
+.pin-submit-button {
+  background: linear-gradient(135deg, #228BE6 0%, #1971c2 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(34, 139, 230, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.pin-submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.pin-submit-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.pin-submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1c7ed6 0%, #1864ab 100%);
+  box-shadow: 0 10px 20px rgba(34, 139, 230, 0.35);
+  transform: translateY(-3px);
+}
+
+.pin-submit-button:active:not(:disabled) {
+  transform: scale(0.98) translateY(0);
+  box-shadow: 0 6px 12px rgba(34, 139, 230, 0.2);
+}
+
+.pin-submit-button:disabled {
+  background: linear-gradient(135deg, #a5d8ff 0%, #74c0fc 100%);
+  cursor: not-allowed;
+  box-shadow: 0 4px 8px rgba(34, 139, 230, 0.15);
+}
+
+.pin-error-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #fff5f5;
+  border-left: 4px solid #e53e3e;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  color: #c92a2a;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(229, 62, 62, 0.1);
+  animation: slideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pin-error-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #e53e3e;
+  animation: pulse 2s infinite;
+}
+
+.pin-error-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: #e53e3e;
+  animation: pulse 2s infinite;
+}
+
+.pin-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+}
+
+.pin-spinner-icon {
+  width: 24px;
+  height: 24px;
+  animation: pin-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+@keyframes pin-spin {
+  0% {
+    transform: rotate(0deg);
+    stroke-dashoffset: 60;
+  }
+  50% {
+    stroke-dashoffset: 20;
+  }
+  100% {
+    transform: rotate(360deg);
+    stroke-dashoffset: 60;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 80% {
+    transform: translateX(4px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-6px);
+  }
+  40%, 60% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .pin-input {
+    width: 46px;
+    height: 58px;
+    font-size: 1.6rem;
+  }
+
+  .pin-logo-circle {
+    width: 70px;
+    height: 70px;
+    font-size: 1.6rem;
+  }
+  
+  .pin-dialog-title {
+    font-size: 1.5rem;
+  }
+  
+  .pin-submit-button {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+}

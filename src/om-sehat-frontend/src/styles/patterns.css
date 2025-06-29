@@ -1,0 +1,35 @@
+/* Subtle background patterns */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0, 112, 243, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 112, 243, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(0, 112, 243, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-diagonal-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 112, 243, 0.03),
+    rgba(0, 112, 243, 0.03) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Utility classes for pattern opacity control */
+.pattern-opacity-5 {
+  opacity: 0.05;
+}
+
+.pattern-opacity-10 {
+  opacity: 0.1;
+}
+
+.pattern-opacity-20 {
+  opacity: 0.2;
+}
